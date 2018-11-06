@@ -26,6 +26,8 @@ public abstract class ChessPiece { //apstraktna klasa Sahovskih figura;
     }
     public static void check(String position){ //pomocna f-ja za provjeru ispravnosti formata i pozicije figure;
         position=position.toUpperCase();//prebacujemo u velika slova sve zbog manjeg posla;
-        if(position.charAt(0))
+        if( position.charAt(0)>'H' || position.charAt(0)<'A' || position.charAt(1)>'8' || position.charAt(1)<'1'){
+            throw new IllegalArgumentException(); //provjeravamo da li je pozicija validna,ako nije bacamo izuzetak;
+        }
     }
 }
