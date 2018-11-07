@@ -35,5 +35,4 @@ public abstract class ChessPiece { //apstraktna klasa Sahovskih figura;
             throw new IllegalArgumentException(); //provjeravamo da li je pozicija validna,ako nije bacamo izuzetak;
         }
     }
-
 }
