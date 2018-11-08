@@ -12,7 +12,7 @@ public class Knight extends ChessPiece { //skakač(konj)
         super.setPosition(position);
     }
 
-    public void checkKnight(String position) {
+    public void checkKnight(String position) throws IllegalChessMoveException {
         position = position.toUpperCase();
         String pocetna = super.getPosition().toUpperCase();//pocetna pozicija figure,u ovom slucaju skakača;
 

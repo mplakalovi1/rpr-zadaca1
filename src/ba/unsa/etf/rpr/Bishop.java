@@ -12,7 +12,7 @@ public class Bishop extends ChessPiece {
         super.setPosition(position);
     }
 
-    public void checkBishop(String position) {
+    public void checkBishop(String position) throws IllegalChessMoveException{
         position = position.toUpperCase();//sve velika zbog tretmana za ista mala,i velika slova;
         String pocetna = super.getPosition().toUpperCase(); //pocetna pozicija figure,u ovom slucaju lovca;
         boolean validno = false; //postavljamo na false prije provjere;

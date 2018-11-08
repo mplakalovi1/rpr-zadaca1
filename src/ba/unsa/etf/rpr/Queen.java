@@ -12,7 +12,7 @@ public class Queen extends ChessPiece {
         super.setPosition(position);
     }
 
-    public void checkQueen(String position) {
+    public void checkQueen(String position) throws IllegalChessMoveException {
         position = position.toUpperCase();
         String pocetna = super.getPosition().toUpperCase();//prebacujemo pocetnu poziciju i zadanu u vrlika slova;
 

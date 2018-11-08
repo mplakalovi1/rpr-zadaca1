@@ -15,7 +15,7 @@ public class Pawn extends ChessPiece {      //pješak;
         super.setPosition(positon); //tek tada pomjeramo pješaka!!!
     }
 
-    public void checkPawn(String position) { // f-ja kojom provjeravamo kretnje pješaka;     //OVDJE JOS VIDJETI DA LI SE MOGU POSITION DEFAULTNO CUVATI KAO VELIKA SLOVA ILI CU OVDJE I TO PRETVORITIT U VELIKA SLOVA!!!
+    public void checkPawn(String position) throws IllegalChessMoveException{ // f-ja kojom provjeravamo kretnje pješaka;
         position = position.toUpperCase();//prebacujemo u velika slova sve radi manje posla;
         String pocetna=super.getPosition().toUpperCase();
 

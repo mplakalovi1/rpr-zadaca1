@@ -12,7 +12,7 @@ public class Rook extends ChessPiece {
         super.setPosition(position);
     }
 
-    public void checkRook(String position) {
+    public void checkRook(String position) throws IllegalChessMoveException {
         position = position.toUpperCase();
         String pocetna = super.getPosition().toUpperCase();//prebacujemo pocetnu poziciju i zadanu u vrlika slova;
 
