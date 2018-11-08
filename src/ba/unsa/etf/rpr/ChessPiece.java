@@ -10,7 +10,7 @@ public abstract class ChessPiece { //apstraktna klasa Sahovskih figura;
     }
 
     public ChessPiece(String position, Color color) { //konstruktor
-        check(position);//odg provjera;
+        check(position);//odg. provjera;
         this.position = position;
         this.color = color;
     }
@@ -23,8 +23,8 @@ public abstract class ChessPiece { //apstraktna klasa Sahovskih figura;
         return color;
     }
 
-    public void setPosition(String position){
-        this.position=position;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public void move(String position) {

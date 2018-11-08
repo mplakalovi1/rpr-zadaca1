@@ -7,7 +7,7 @@ public class Knight extends ChessPiece { //skakač(konj)
 
     @Override
     public void move(String position) {
-        this.checkKnight(position);
+        checkKnight(position);
         super.move(position);
         super.setPosition(position);
     }
@@ -15,14 +15,32 @@ public class Knight extends ChessPiece { //skakač(konj)
     public void checkKnight(String position) throws IllegalChessMoveException {
         position = position.toUpperCase();
         String pocetna = super.getPosition().toUpperCase();//pocetna pozicija figure,u ovom slucaju skakača;
+        boolean validno = false;
 
-        if (position.charAt(0) != pocetna.charAt(0) - 2 && position.charAt(0) != pocetna.charAt(0) - 1 && position.charAt(0) != pocetna.charAt(0) + 1 && position.charAt(0) != pocetna.charAt(0) + 2) {
-            throw new IllegalChessMoveException(); //jos nismo definisali ovaj izuzetak;
-        } else {
-            if (position.charAt(1) != pocetna.charAt(1) - 2 && position.charAt(1) != pocetna.charAt(1) - 1 && position.charAt(1) != pocetna.charAt(1) + 1 && position.charAt(1) != pocetna.charAt(1) + 2) {
-                throw new IllegalChessMoveException();
+        if (position.charAt(0) == pocetna.charAt(0) - 2) {
+            if (position.charAt(1) == pocetna.charAt(1) + 1 || position.charAt(1) == pocetna.charAt(1) - 1) {
+                validno = true;
             }
         }
+        if (position.charAt(0) == pocetna.charAt(0) - 1) {
+            if (position.charAt(1) == pocetna.charAt(1) + 2 || position.charAt(1) == pocetna.charAt(1) - 2) {
+                validno = true;
+            }
+        }
+        if (position.charAt(0) == pocetna.charAt(0) + 1) {
+            if (position.charAt(1) == pocetna.charAt(1) + 2 || position.charAt(1) == pocetna.charAt(1) - 2) {
+                validno = true;
+            }
+        }
+        if (position.charAt(0) == pocetna.charAt(0) + 2) {
+            if (position.charAt(1) == pocetna.charAt(1) + 1 || position.charAt(1) == pocetna.charAt(1) - 1) {
+                validno = true;
+            }
+        }
+        if (!validno) {
+            throw new IllegalChessMoveException();
+        }
+
     }
 
 }

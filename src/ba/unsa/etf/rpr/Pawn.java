@@ -10,7 +10,7 @@ public class Pawn extends ChessPiece {      //pješak;
     @Override
     public void move(String positon) { //dopunit cemo motodu move pogodno ovoj figuri;
 
-        this.checkPawn(positon);//provjeramo da li je potez dozvoljen za odg. figuru;
+        checkPawn(positon);//provjeramo da li je potez dozvoljen za odg. figuru;
         super.move(positon); //zatim pozivamo metodu iz bazne klase da provjerimo korektnost formata i pozicije;
         super.setPosition(positon); //tek tada pomjeramo pješaka!!!
     }

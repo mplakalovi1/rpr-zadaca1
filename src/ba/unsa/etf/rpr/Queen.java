@@ -7,27 +7,16 @@ public class Queen extends ChessPiece {
 
     @Override
     public void move(String position) {
-        this.checkQueen(position);
+        checkQueen(position);
         super.move(position);
         super.setPosition(position);
     }
 
     public void checkQueen(String position) throws IllegalChessMoveException {
-        position = position.toUpperCase();
-        String pocetna = super.getPosition().toUpperCase();//prebacujemo pocetnu poziciju i zadanu u vrlika slova;
+        position = position.toUpperCase();//sve velika zbog tretmana za ista mala,i velika slova;
+        String pocetna = super.getPosition().toUpperCase();
 
-        boolean validno = false; //postavljamo na false prije provjere;
-        //da li se Queen krece dijagonalno;
-        for (int i = -7; i < 8; i++) {
-            if (i != 0) {
-                if (pocetna.charAt(0) + i == position.charAt(0) && pocetna.charAt(1) + i == position.charAt(1)) {
-                    validno = true;
-                    break;
-                }
-            }
-        }
-
-        if (position.charAt(0) != pocetna.charAt(0) && position.charAt(1) != pocetna.charAt(1) && !validno) {
+        if (position.charAt(0) != pocetna.charAt(0) && position.charAt(1) != pocetna.charAt(1) && !Bishop.kretnjaPoDijagonali(position, super.getPosition())) {
             throw new IllegalChessMoveException();
         }
 

@@ -7,36 +7,33 @@ public class Bishop extends ChessPiece {
 
     @Override
     public void move(String position) {
-        this.checkBishop(position);
         super.move(position);
+        checkBishop(position);
         super.setPosition(position);
     }
 
-    public void checkBishop(String position) throws IllegalChessMoveException{
-        position = position.toUpperCase();//sve velika zbog tretmana za ista mala,i velika slova;
-        String pocetna = super.getPosition().toUpperCase(); //pocetna pozicija figure,u ovom slucaju lovca;
-        boolean validno = false; //postavljamo na false prije provjere;
-        //da li se lovac krece dijagonalno;
-        for (int i = -7; i < 8; i++) {
-            if (i != 0) {
-                if (pocetna.charAt(0) + i == position.charAt(0) && pocetna.charAt(1) + i == position.charAt(1)) {  //provjerava glavnu dijagonalu
-                    validno = true;
-                    break;
-                }
-            }
-        }
-
-        for (int i = -7; i < 8; i++) {
-            if (i != 0) {
-                if (pocetna.charAt(0) + i == position.charAt(0) && pocetna.charAt(1) + i == position.charAt(1)) {  //provjerava glavnu dijagonalu
-                    validno = true;
-                    break;
-                }
-            }
-        }
-        if (!validno) {
+    public void checkBishop(String position) throws IllegalChessMoveException {
+        if (!kretnjaPoDijagonali(position, super.getPosition())) {
             throw new IllegalChessMoveException();
         }
+    }
 
+    public static boolean kretnjaPoDijagonali(String position, String pocetna) {
+        position = position.toUpperCase();//sve velika zbog tretmana za ista mala,i velika slova;
+        pocetna = pocetna.toUpperCase(); //pocetna pozicija figure,u ovom slucaju lovca;
+
+        boolean moveBishop = false; //postavljamo na false prije provjere;
+
+        for (int i = -7; i < 8; i++) { //testiramo da li se krece po dijagonali ???
+            if (i != 0) {
+
+                if (position.charAt(0) == pocetna.charAt(0) + i && position.charAt(1) == pocetna.charAt(1) + i) {
+                    moveBishop = true;
+                } else if (position.charAt(0) == pocetna.charAt(0) + i && position.charAt(1) == pocetna.charAt(1) - i) {
+                    moveBishop = true;
+                }
+            }
+        }
+        return moveBishop;
     }
 }
