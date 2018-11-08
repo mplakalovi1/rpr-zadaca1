@@ -25,7 +25,6 @@ public abstract class ChessPiece { //apstraktna klasa Sahovskih figura;
 
     public void move(String position) {
         check(position);//provjere ,ako treba bacit ce izuzetak;
-        this.position = position;
     }
 
     public static void check(String position) { //pomocna f-ja za provjeru ispravnosti formata i pozicije figure;
