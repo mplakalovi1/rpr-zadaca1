@@ -17,13 +17,14 @@ public class Pawn extends ChessPiece {      //pješak;
 
     public void checkPawn(String position) { // f-ja kojom provjeravamo kretnje pješaka;     //OVDJE JOS VIDJETI DA LI SE MOGU POSITION DEFAULTNO CUVATI KAO VELIKA SLOVA ILI CU OVDJE I TO PRETVORITIT U VELIKA SLOVA!!!
         position = position.toUpperCase();//prebacujemo u velika slova sve radi manje posla;
+        String pocetna=super.getPosition().toUpperCase();
 
-        if (position.charAt(0) != super.getPosition().charAt(0)) {
+        if (position.charAt(0) != pocetna.charAt(0)) {
             throw new IllegalChessMoveException(); //jos nismo definisali ovaj izuzetak;
         }
-        if (position.charAt(1) != super.getPosition().charAt(1) + 1) {
+        if (position.charAt(1) != pocetna.charAt(1) + 1) {
 
-            if (super.getPosition().charAt(1) == '2' && position.charAt(1) == '2' + 2) {
+            if (pocetna.charAt(1) == '2' && position.charAt(1) == '2' + 2) {
                 //ne bacaj izuzetak i ne radi nista!!!
             } else {
                 throw new IllegalChessMoveException();

@@ -14,8 +14,8 @@ public class Knight extends ChessPiece { //skakač(konj)
 
     public void checkKnight(String position) {
         position = position.toUpperCase();
-        String pocetna = super.getPosition();//pocetna pozicija figure,u ovom slucaju skakača;
-        //
+        String pocetna = super.getPosition().toUpperCase();//pocetna pozicija figure,u ovom slucaju skakača;
+
         if (position.charAt(0) != pocetna.charAt(0) - 2 && position.charAt(0) != pocetna.charAt(0) - 1 && position.charAt(0) != pocetna.charAt(0) + 1 && position.charAt(0) != pocetna.charAt(0) + 2) {
             throw new IllegalChessMoveException(); //jos nismo definisali ovaj izuzetak;
         } else {
