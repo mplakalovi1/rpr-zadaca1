@@ -23,6 +23,10 @@ public abstract class ChessPiece { //apstraktna klasa Sahovskih figura;
         return color;
     }
 
+    public void setPosition(String position){
+        this.position=position;
+    }
+
     public void move(String position) {
         check(position);//provjere ,ako treba bacit ce izuzetak;
     }
