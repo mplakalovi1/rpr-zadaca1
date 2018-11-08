@@ -4,7 +4,7 @@ public class Pawn extends ChessPiece {      //pješak;
     // atributi se nasljedjuju!!! i dovoljni su kao takvi;
 
     public Pawn(String position, Color color) { //konstruktor
-        super(position,color); //pozivamo const bazne klase;
+        super(position, color); //pozivamo const bazne klase;
     }
 
     @Override
