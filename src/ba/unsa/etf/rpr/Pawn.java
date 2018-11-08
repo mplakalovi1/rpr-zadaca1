@@ -29,7 +29,7 @@ public class Pawn extends ChessPiece {      //pješak;
             } else {
                 throw new IllegalChessMoveException();
             }
-        }
 
+    }
     }
 }
