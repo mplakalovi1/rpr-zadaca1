@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr;
 
 
-public abstract class ChessPiece { //apstraktna klasa Sahovskih figura;
+public abstract class ChessPiece implements Comparable<ChessPiece> { //apstraktna klasa Sahovskih figura;
     private String position;
     private Color color;
 
@@ -13,6 +13,9 @@ public abstract class ChessPiece { //apstraktna klasa Sahovskih figura;
         check(position);//odg. provjera;
         this.position = position;
         this.color = color;
+    }
+    public int compareTo(ChessPiece figura){
+    return figura.position.compareTo(this.position);
     }
 
     public String getPosition() { //getter za positon
