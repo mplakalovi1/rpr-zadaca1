@@ -19,7 +19,16 @@ public class Bishop extends ChessPiece {
         //da li se lovac krece dijagonalno;
         for (int i = -7; i < 8; i++) {
             if (i != 0) {
-                if (pocetna.charAt(0) + i == position.charAt(0) && pocetna.charAt(1) + i == position.charAt(1)) {
+                if (pocetna.charAt(0) + i == position.charAt(0) && pocetna.charAt(1) + i == position.charAt(1)) {  //provjerava glavnu dijagonalu
+                    validno = true;
+                    break;
+                }
+            }
+        }
+
+        for (int i = -7; i < 8; i++) {
+            if (i != 0) {
+                if (pocetna.charAt(0) + i == position.charAt(0) && pocetna.charAt(1) + i == position.charAt(1)) {  //provjerava glavnu dijagonalu
                     validno = true;
                     break;
                 }
