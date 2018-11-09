@@ -14,8 +14,12 @@ public abstract class ChessPiece implements Comparable<ChessPiece> { //apstraktn
         this.position = position;
         this.color = color;
     }
-    public int compareTo(ChessPiece figura){
-    return figura.position.compareTo(this.position);
+
+    public int compareTo(ChessPiece figura) {
+        return figura.position.compareTo(this.position);
+    }
+    public boolean equals(ChessPiece s){
+
     }
 
     public String getPosition() { //getter za positon

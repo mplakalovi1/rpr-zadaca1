@@ -31,14 +31,61 @@ public class Board {
 
     }
 
-    public void move(Class type, ChessPiece.Color color, String position) {
-        for (ChessPiece x : aktivneFigure) {//trazimo odg.figuru
-            if (x.getClass() == type) {
-                if (x.getColor() == color) {
-                    x.move(position); // pomjeramo ga ;
+    public void move(Class type, ChessPiece.Color color, String position) throws IllegalChessMoveException {
+        for (ChessPiece figura : aktivneFigure) { //trazimo da li na odredisnoj poziciji ima figure i u zavisnosti od njene boje radimo odgovarajuce stvari;
+            if (figura.getPosition().toUpperCase().equals(position.toUpperCase())) {
+                if (figura.getColor() == color) {
+                    throw new IllegalChessMoveException(); //ako na odredistu imamo figuru iste boje
+                } else {
+                    aktivneFigure.remove(figura); //ako na odredistu imamo figuru razlicite boje "jedemo",tj.izbacujemo je;
                 }
             }
         }
+
+
+        //nakon sto smo provjerili
+        boolean pozivLegalan = false;
+
+        for (ChessPiece figura : aktivneFigure) { //prolazimo kroz aktivne figure
+            if (figura.getClass() == type && figura.getColor() == color) {   //ako se poklapaju tipovi i boja
+                try {
+                    figura.move(position); //provjeravamo da li je potez Legalan;
+                    pozivLegalan = true;
+                } catch (Exception e) {
+                    //dovoljno je da uhvati samo izuzetak; }
+                }
+            }
+        }
+        if (!pozivLegalan) { //ako nema figure odgovarajuce ili ovaj potez nije validan za niti jednu od njoh bacamo izuzetak;
+            throw new IllegalChessMoveException();
+        }
+
+        aktivneFigure.contains()
+    }
+
+    public boolean preskakanje(ChessPiece figura, String odrediste) {
+        boolean preskok = false;
+        if (figura instanceof Pawn) {//ako je pješak provjeravamo ima li preskakanja, a ono je moguce samo ako je to prvi potez kada moze naprijed za 2 mjesta;
+            int pomocna = odrediste.charAt(1) - figura.getPosition().charAt(1);
+            if (pomocna == -2) {
+                preskok = daLiJePozicijaZauzeta(figura.getPosition().charAt(0) + "" + (char) (figura.getPosition().charAt(1) - 1));
+            }
+            if (pomocna == 2) {
+                preskok = daLiJePozicijaZauzeta(figura.getPosition().charAt(0) + "" + (char) (figura.getPosition().charAt(1) + 1));
+            }
+        }
+
+
+    }
+
+
+    public boolean daLiJePozicijaZauzeta(String s) {
+        for (ChessPiece figura : aktivneFigure) {
+            if (figura.getPosition().toUpperCase().equals(s.toUpperCase())) {
+                return true;
+            }
+        }
+        return false;
 
     }
 }
