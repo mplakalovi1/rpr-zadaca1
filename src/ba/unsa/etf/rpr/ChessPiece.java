@@ -1,11 +1,10 @@
 package ba.unsa.etf.rpr;
 
-
 public abstract class ChessPiece implements Comparable<ChessPiece> { //apstraktna klasa Sahovskih figura;
     private String position;
     private Color color;
 
-    public static enum Color { //pobrojani tip Color ; // static je suvisno,ovdje jer se podrazumjeva ;
+    public enum Color { //pobrojani tip Color ; // static je suvisno,ovdje jer se podrazumjeva ;
         BLACK, WHITE;
     }
 
@@ -17,9 +16,6 @@ public abstract class ChessPiece implements Comparable<ChessPiece> { //apstraktn
 
     public int compareTo(ChessPiece figura) {
         return figura.position.compareTo(this.position);
-    }
-    public boolean equals(ChessPiece s){
-
     }
 
     public String getPosition() { //getter za positon
@@ -34,7 +30,7 @@ public abstract class ChessPiece implements Comparable<ChessPiece> { //apstraktn
         this.position = position;
     }
 
-    public void move(String position) {
+    public void move(String position) throws IllegalChessMoveException {
         check(position);//provjera ,ako treba bacit ce izuzetak;
     }
 

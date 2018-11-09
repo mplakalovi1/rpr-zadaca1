@@ -204,11 +204,23 @@ public class Board {
                     }
                 }
             }
-
-
+            if (pom1 > 0 && pom2 == 0) { //ako se krece horizontalno udesno
+                for (int i = 1; i < pom1; i++) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + figura.getPosition().charAt(1));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
+            if (pom1 < 0 && pom2 == 0) { //ako se krece horizontalno ulijevo
+                for (int i = -1; i > pom1; i--) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + figura.getPosition().charAt(1));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
         }
-
-
         return preskok;
     }
 

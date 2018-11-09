@@ -6,9 +6,9 @@ public class Knight extends ChessPiece { //skakač(konj)
     }
 
     @Override
-    public void move(String position) {
-        checkKnight(position);
+    public void move(String position) throws IllegalChessMoveException {
         super.move(position);
+        checkKnight(position);
         super.setPosition(position);
     }
 

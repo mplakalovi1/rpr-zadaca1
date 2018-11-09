@@ -6,9 +6,9 @@ public class Queen extends ChessPiece {
     }
 
     @Override
-    public void move(String position) {
-        checkQueen(position);
+    public void move(String position) throws IllegalChessMoveException {
         super.move(position);
+        checkQueen(position);
         super.setPosition(position);
     }
 

@@ -8,16 +8,15 @@ public class Pawn extends ChessPiece {      //pješak;
     }
 
     @Override
-    public void move(String positon) { //dopunit cemo motodu move pogodno ovoj figuri;
-
-        checkPawn(positon);//provjeramo da li je potez dozvoljen za odg. figuru;
-        super.move(positon); //zatim pozivamo metodu iz bazne klase da provjerimo korektnost formata i pozicije;
-        super.setPosition(positon); //tek tada pomjeramo pješaka!!!
+    public void move(String positon) throws IllegalChessMoveException { //dopunit cemo motodu move pogodno ovoj figuri;
+        super.move(positon);
+        checkPawn(positon);
+        this.setPosition(positon);
     }
 
-    public void checkPawn(String position) throws IllegalChessMoveException{ // f-ja kojom provjeravamo kretnje pješaka;
+    public void checkPawn(String position) throws IllegalChessMoveException { // f-ja kojom provjeravamo kretnje pješaka;
         position = position.toUpperCase();//prebacujemo u velika slova sve radi manje posla;
-        String pocetna=super.getPosition().toUpperCase();
+        String pocetna = super.getPosition().toUpperCase();
 
         if (position.charAt(0) != pocetna.charAt(0)) {
             throw new IllegalChessMoveException(); //jos nismo definisali ovaj izuzetak;
@@ -30,6 +29,6 @@ public class Pawn extends ChessPiece {      //pješak;
                 throw new IllegalChessMoveException();
             }
 
-    }
+        }
     }
 }
