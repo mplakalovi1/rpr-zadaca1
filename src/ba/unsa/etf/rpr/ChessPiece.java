@@ -34,7 +34,11 @@ public abstract class ChessPiece implements Comparable<ChessPiece> { //apstraktn
         check(position);//provjera ,ako treba bacit ce izuzetak;
     }
 
-    public static void check(String position) { //pomocna f-ja za provjeru ispravnosti formata i pozicije figure;
+    public static void check(String position) {//pomocna f-ja za provjeru ispravnosti formata i pozicije figure;
+        if (position.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
         position = position.toUpperCase();  //prebacujemo u velika slova sve zbog manjeg posla;
 
         if (position.charAt(0) > 'H' || position.charAt(0) < 'A' || position.charAt(1) > '8' || position.charAt(1) < '1' || position.length() != 2) {
