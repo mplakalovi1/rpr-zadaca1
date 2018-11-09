@@ -81,30 +81,74 @@ public class Board {
             if (pom2 > 1) { //krece se vert prema gore
                 for (int i = 1; i < pom2; i++) {
                     preskok = daLiJePozicijaZauzeta(figura.getPosition().charAt(0) + "" + (char) (figura.getPosition().charAt(1) + i));
-                    if(preskok){break;}
+                    if (preskok) {
+                        break;
+                    }
                 }
             }
             if (pom2 < -1) { //krece se vert prema dolee
                 for (int i = -1; i > pom2; i--) {
                     preskok = daLiJePozicijaZauzeta(figura.getPosition().charAt(0) + "" + (char) (figura.getPosition().charAt(1) + i));
-                    if(preskok){break;}
+                    if (preskok) {
+                        break;
+                    }
                 }
             }
             if (pom1 > 1) { //krece se horiz prema desno
                 for (int i = 1; i < pom1; i++) {
                     preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + figura.getPosition().charAt(1));
-                    if(preskok){break;}
+                    if (preskok) {
+                        break;
+                    }
                 }
             }
             if (pom1 < -1) { //krece se horz prema lijevo
                 for (int i = -1; i > pom1; i--) {
                     preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + figura.getPosition().charAt(1));
-                    if(preskok){break;}
+                    if (preskok) {
+                        break;
+                    }
                 }
             }
         }
 
-        if(figura instanceof Bishop){
+        if (figura instanceof Bishop) {
+            int pom1 = odrediste.charAt(0) - figura.getPosition().charAt(0);
+            int pom2 = odrediste.charAt(1) - figura.getPosition().charAt(1);
+
+            if (pom1 > 0 && pom2 > 0) { //ako se krece dijagonalno po 45 stepeni
+                for (int i = 1; i < pom1; i++) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + (char) (figura.getPosition().charAt(1) + i));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
+            if (pom1 < 0 && pom2 < 0) { //ako se krece dijagonalno po 45 stepeni
+                for (int i = -1; i > pom1; i--) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + (char) (figura.getPosition().charAt(1) + i));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
+            if (pom1 > 0 && pom2 < 0) { //ako se krece dijagonalno po 45 stepeni
+                for (int i = 1; i < pom1; i++) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + (char) (figura.getPosition().charAt(1) - i));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
+            if (pom1 < 0 && pom2 > 0) { //ako se krece dijagonalno po 45 stepeni
+                for (int i = 1; i < pom2; i++) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) - i) + "" + (char) (figura.getPosition().charAt(1) + i));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
+
 
         }
 
