@@ -124,7 +124,7 @@ public class Board {
                     }
                 }
             }
-            if (pom1 < 0 && pom2 < 0) { //ako se krece dijagonalno po 45 stepeni
+            if (pom1 < 0 && pom2 < 0) { //ako se krece dijagonalno po -45 stepeni
                 for (int i = -1; i > pom1; i--) {
                     preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + (char) (figura.getPosition().charAt(1) + i));
                     if (preskok) {
@@ -132,7 +132,7 @@ public class Board {
                     }
                 }
             }
-            if (pom1 > 0 && pom2 < 0) { //ako se krece dijagonalno po 45 stepeni
+            if (pom1 > 0 && pom2 < 0) { //ako se krece dijagonalno po 135 stepeni
                 for (int i = 1; i < pom1; i++) {
                     preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + (char) (figura.getPosition().charAt(1) - i));
                     if (preskok) {
@@ -140,7 +140,63 @@ public class Board {
                     }
                 }
             }
-            if (pom1 < 0 && pom2 > 0) { //ako se krece dijagonalno po 45 stepeni
+            if (pom1 < 0 && pom2 > 0) { //ako se krece dijagonalno po 225 stepeni
+                for (int i = 1; i < pom2; i++) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) - i) + "" + (char) (figura.getPosition().charAt(1) + i));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
+
+
+        }
+
+        if (figura instanceof Queen) {
+            int pom1 = odrediste.charAt(0) - figura.getPosition().charAt(0);
+            int pom2 = odrediste.charAt(1) - figura.getPosition().charAt(1);
+
+            if (pom1 == 0 && pom2 > 0) { //ako se krece vertikalno prema gore
+                for (int i = 1; i < pom2; i++) {
+                    preskok = daLiJePozicijaZauzeta(figura.getPosition().charAt(0) + "" + (char) (figura.getPosition().charAt(1) + i));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
+            if (pom1 == 0 && pom2 < 0) { //ako se krece vertikalno prema dole
+                for (int i = -1; i > pom2; i--) {
+                    preskok = daLiJePozicijaZauzeta(figura.getPosition().charAt(0) + "" + (char) (figura.getPosition().charAt(1) + i));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
+            if (pom1 > 0 && pom2 > 0) { //ako se krece dijagonalno po 45 stepeni
+                for (int i = 1; i < pom2; i++) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + (char) (figura.getPosition().charAt(1) + i));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
+            if (pom1 < 0 && pom2 < 0) { //ako se krece dijagonalno po 225 stepeni
+                for (int i = -1; i > pom2; i--) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + (char) (figura.getPosition().charAt(1) + i));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
+            if (pom1 > 0 && pom2 < 0) { //ako se krece dijagonalno po -45 stepeni
+                for (int i = 1; i < pom1; i++) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + (char) (figura.getPosition().charAt(1) - i));
+                    if (preskok) {
+                        break;
+                    }
+                }
+            }
+            if (pom1 < 0 && pom2 > 0) { //ako se krece dijagonalno po 135 stepeni
                 for (int i = 1; i < pom2; i++) {
                     preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) - i) + "" + (char) (figura.getPosition().charAt(1) + i));
                     if (preskok) {
