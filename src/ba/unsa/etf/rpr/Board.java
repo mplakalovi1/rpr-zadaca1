@@ -59,12 +59,11 @@ public class Board {
         if (!pozivLegalan) { //ako nema figure odgovarajuce ili ovaj potez nije validan za niti jednu od njoh bacamo izuzetak;
             throw new IllegalChessMoveException();
         }
-
-        aktivneFigure.contains()
     }
 
     public boolean preskakanje(ChessPiece figura, String odrediste) {
         boolean preskok = false;
+
         if (figura instanceof Pawn) {//ako je pješak provjeravamo ima li preskakanja, a ono je moguce samo ako je to prvi potez kada moze naprijed za 2 mjesta;
             int pomocna = odrediste.charAt(1) - figura.getPosition().charAt(1);
             if (pomocna == -2) {
@@ -75,7 +74,42 @@ public class Board {
             }
         }
 
+        if (figura instanceof Rook) {
+            int pom1 = odrediste.charAt(0) - figura.getPosition().charAt(0);
+            int pom2 = odrediste.charAt(1) - figura.getPosition().charAt(1);
 
+            if (pom2 > 1) { //krece se vert prema gore
+                for (int i = 1; i < pom2; i++) {
+                    preskok = daLiJePozicijaZauzeta(figura.getPosition().charAt(0) + "" + (char) (figura.getPosition().charAt(1) + i));
+                    if(preskok){break;}
+                }
+            }
+            if (pom2 < -1) { //krece se vert prema dolee
+                for (int i = -1; i > pom2; i--) {
+                    preskok = daLiJePozicijaZauzeta(figura.getPosition().charAt(0) + "" + (char) (figura.getPosition().charAt(1) + i));
+                    if(preskok){break;}
+                }
+            }
+            if (pom1 > 1) { //krece se horiz prema desno
+                for (int i = 1; i < pom1; i++) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + figura.getPosition().charAt(1));
+                    if(preskok){break;}
+                }
+            }
+            if (pom1 < -1) { //krece se horz prema lijevo
+                for (int i = -1; i > pom1; i--) {
+                    preskok = daLiJePozicijaZauzeta((char) (figura.getPosition().charAt(0) + i) + "" + figura.getPosition().charAt(1));
+                    if(preskok){break;}
+                }
+            }
+        }
+
+        if(figura instanceof Bishop){
+
+        }
+
+
+        return preskok;
     }
 
 
