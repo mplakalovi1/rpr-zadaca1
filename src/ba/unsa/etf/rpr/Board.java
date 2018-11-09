@@ -32,6 +32,7 @@ public class Board {
     }
 
     public void move(Class type, ChessPiece.Color color, String position) throws IllegalChessMoveException {
+
         for (ChessPiece figura : aktivneFigure) { //trazimo da li na odredisnoj poziciji ima figure i u zavisnosti od njene boje radimo odgovarajuce stvari;
             if (figura.getPosition().toUpperCase().equals(position.toUpperCase())) {
                 if (figura.getColor() == color) {
@@ -43,14 +44,16 @@ public class Board {
         }
 
 
-        //nakon sto smo provjerili
         boolean pozivLegalan = false;
 
         for (ChessPiece figura : aktivneFigure) { //prolazimo kroz aktivne figure
             if (figura.getClass() == type && figura.getColor() == color) {   //ako se poklapaju tipovi i boja
                 try {
-                    figura.move(position); //provjeravamo da li je potez Legalan;
+                    figura.move(position); //provjeravamo da li je potez Legalan;format i granice ploce
+                    preskakanje(figura, position);//provjeravamo da li preskace nesto;
+                    figura.setPosition(position); //tek ako prodje sve iznad navedeno pomjeramo i izlazimo iz petlje;
                     pozivLegalan = true;
+                    break;
                 } catch (Exception e) {
                     //dovoljno je da uhvati samo izuzetak; }
                 }
@@ -61,7 +64,7 @@ public class Board {
         }
     }
 
-    public boolean preskakanje(ChessPiece figura, String odrediste) {
+    public void preskakanje(ChessPiece figura, String odrediste) throws IllegalChessMoveException {
         boolean preskok = false;
 
         if (figura instanceof Pawn) {//ako je pješak provjeravamo ima li preskakanja, a ono je moguce samo ako je to prvi potez kada moze naprijed za 2 mjesta;
@@ -221,7 +224,9 @@ public class Board {
                 }
             }
         }
-        return preskok;
+        if (preskok) {
+            throw new IllegalChessMoveException();
+        }
     }
 
 

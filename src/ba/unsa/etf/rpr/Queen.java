@@ -9,7 +9,6 @@ public class Queen extends ChessPiece {
     public void move(String position) throws IllegalChessMoveException {
         super.move(position);
         checkQueen(position);
-        super.setPosition(position);
     }
 
     public void checkQueen(String position) throws IllegalChessMoveException {

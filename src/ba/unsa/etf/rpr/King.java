@@ -11,7 +11,6 @@ public class King extends ChessPiece {
     public void move(String position) throws IllegalChessMoveException {
         super.move(position);
         checkKing(position);
-        super.setPosition(position);
     }
 
     public void checkKing(String position) throws IllegalChessMoveException {

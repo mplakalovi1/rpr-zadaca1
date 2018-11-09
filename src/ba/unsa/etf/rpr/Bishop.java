@@ -9,7 +9,6 @@ public class Bishop extends ChessPiece {
     public void move(String position) throws IllegalChessMoveException {
         super.move(position);
         checkBishop(position);
-        super.setPosition(position);
     }
 
     public void checkBishop(String position) throws IllegalChessMoveException {

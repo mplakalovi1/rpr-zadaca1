@@ -9,7 +9,6 @@ public class Knight extends ChessPiece { //skakač(konj)
     public void move(String position) throws IllegalChessMoveException {
         super.move(position);
         checkKnight(position);
-        super.setPosition(position);
     }
 
     public void checkKnight(String position) throws IllegalChessMoveException {

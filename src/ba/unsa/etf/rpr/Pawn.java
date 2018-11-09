@@ -11,7 +11,6 @@ public class Pawn extends ChessPiece {      //pješak;
     public void move(String positon) throws IllegalChessMoveException { //dopunit cemo motodu move pogodno ovoj figuri;
         super.move(positon);
         checkPawn(positon);
-        this.setPosition(positon);
     }
 
     public void checkPawn(String position) throws IllegalChessMoveException { // f-ja kojom provjeravamo kretnje pješaka;
@@ -23,7 +22,7 @@ public class Pawn extends ChessPiece {      //pješak;
         }
         if (position.charAt(1) != pocetna.charAt(1) + 1) {
 
-            if (pocetna.charAt(1) == '2' && position.charAt(1) == '2' + 2) {
+            if (pocetna.charAt(1) == '2' && position.charAt(1) == '4') {
                 //ne bacaj izuzetak i ne radi nista!!!
             } else {
                 throw new IllegalChessMoveException();

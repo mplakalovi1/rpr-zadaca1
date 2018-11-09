@@ -9,7 +9,6 @@ public class Rook extends ChessPiece {
     public void move(String position) throws IllegalChessMoveException {
         super.move(position);
         checkRook(position);
-        super.setPosition(position);
     }
 
     public void checkRook(String position) throws IllegalChessMoveException {
