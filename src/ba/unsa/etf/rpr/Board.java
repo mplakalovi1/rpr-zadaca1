@@ -239,4 +239,28 @@ public class Board {
         return false;
 
     }
+
+    public void move(String oldPosition, String newPosition) throws IllegalChessMoveException {
+        boolean ima = false; //pretp. da je prazno to mjesto
+        for (ChessPiece figura : aktivneFigure) {
+            if (figura.getPosition().toUpperCase().equals(oldPosition.toUpperCase())) {
+                move(figura.getClass(), figura.getColor(), newPosition);
+                ima = true;
+            }
+        }
+        if (!ima) { //ako je zaista prazno bacamo izuzetak, jer nemamo koju figuru pomjeriti;
+            throw new IllegalChessMoveException();
+        }
+    }
+
+    public boolean isCheck(ChessPiece.Color color) {
+        boolean imaIgraca = false;
+        for (ChessPiece figura : aktivneFigure) {
+            if (figura.getColor() == color) {
+                imaIgraca = true;
+            }
+        }
+        return imaIgraca;
+    }
+
 }
