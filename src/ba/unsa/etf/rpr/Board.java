@@ -33,17 +33,6 @@ public class Board {
 
     public void move(Class type, ChessPiece.Color color, String position) throws IllegalChessMoveException {
 
-        for (ChessPiece figura : aktivneFigure) { //trazimo da li na odredisnoj poziciji ima figure i u zavisnosti od njene boje radimo odgovarajuce stvari;
-            if (figura.getPosition().toUpperCase().equals(position.toUpperCase())) {
-                if (figura.getColor() == color) {
-                    throw new IllegalChessMoveException(); //ako na odredistu imamo figuru iste boje
-                } else {
-                    aktivneFigure.remove(figura); //ako na odredistu imamo figuru razlicite boje "jedemo",tj.izbacujemo je;
-                }
-            }
-        }
-
-
         boolean pozivLegalan = false;
 
         for (ChessPiece figura : aktivneFigure) { //prolazimo kroz aktivne figure
@@ -51,7 +40,6 @@ public class Board {
                 try {
                     figura.move(position); //provjeravamo da li je potez Legalan;format i granice ploce
                     preskakanje(figura, position);//provjeravamo da li preskace nesto;
-                    figura.setPosition(position); //tek ako prodje sve iznad navedeno pomjeramo i izlazimo iz petlje;
                     pozivLegalan = true;
                     break;
                 } catch (Exception e) {
@@ -62,6 +50,23 @@ public class Board {
         if (!pozivLegalan) { //ako nema figure odgovarajuce ili ovaj potez nije validan za niti jednu od njoh bacamo izuzetak;
             throw new IllegalChessMoveException();
         }
+        //prethodno smo se uvjerili da je potez validan i da postoji odgovarajuca figura za ovaj potez, sada provjerimo sta se nalazi na trazenoj lokaciji,ako se nalazi;
+
+        for (ChessPiece figura : aktivneFigure) { //trazimo da li na odredisnoj poziciji ima figure i u zavisnosti od njene boje radimo odgovarajuce stvari;
+            if (figura.getPosition().toUpperCase().equals(position.toUpperCase())) {
+                if (figura.getColor() == color) {
+                    throw new IllegalChessMoveException(); //ako na odredistu imamo figuru iste boje
+                } else {
+                    aktivneFigure.remove(figura); //sklanjamo tu figuru koja je druge boje;
+                }
+            }
+        }
+        for (ChessPiece figura : aktivneFigure) { //prolazimo kroz aktivne figure opet kako bi figuri odg promijenili lokaciju
+            if (figura.getClass() == type && figura.getColor() == color) {
+                figura.setPosition(position);
+            }
+        }
+
     }
 
     public void preskakanje(ChessPiece figura, String odrediste) throws IllegalChessMoveException {
