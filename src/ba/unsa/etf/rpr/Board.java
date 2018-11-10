@@ -293,13 +293,108 @@ public class Board {
 
 
     public boolean isCheck(ChessPiece.Color color) {
-        boolean imaIgraca = false;
-        for (ChessPiece figura : aktivneFigure) {
-            if (figura.getColor() == color) {
-                imaIgraca = true;
+
+        String pozicija = "";//pozicija kralja
+        String kraljica = ""; //pozicija kraljice protivnika; analogno cemo i za ostale figure;
+        ArrayList<String> topovi = new ArrayList<>();
+        ArrayList<String> lovci = new ArrayList<>();
+        ArrayList<String> skakaci = new ArrayList<>();
+        ArrayList<String> pjesaci = new ArrayList<>();
+
+        for (ChessPiece figura : aktivneFigure) { //prolazimo kroz aktivne figure da lociramo kralja date boje;
+            if (figura instanceof King && figura.getColor() == color) { //nasli smo kralja date boje;
+                pozicija = figura.getPosition().toUpperCase(); //sacuvajmo poziciju kralja;
+            }
+            //USPUT BILJEZIMO GDJE SE KOJA FIGURA PROTIVNIKA NALAZI i biljeziti onu ciji je put do kralja cist!!!;
+
+                if (figura instanceof Queen && figura.getColor() != color) {
+                    kraljica = figura.getPosition().toUpperCase();
+                }
+                if (figura instanceof Rook && figura.getColor() != color) {
+                    topovi.add(figura.getPosition().toUpperCase());
+                }
+                if (figura instanceof Bishop && figura.getColor() != color) {
+                    lovci.add(figura.getPosition().toUpperCase());
+                }
+                if (figura instanceof Knight && figura.getColor() != color) {
+                    skakaci.add(figura.getPosition().toUpperCase());
+                }
+                if (figura instanceof Pawn && figura.getColor() != color) {
+                    pjesaci.add(figura.getPosition().toUpperCase());
+                }
+        }
+
+        //SADA ZABILJEZIMO POZICIJE U ODGOVARAJUCIM SMJEROVIMA OKO KRALJA;
+
+        ArrayList<String> uPlus = new ArrayList<>(); //ovo odgovara kraljici i topu;
+        for (int i = 1; i < 8; i++) {
+            uPlus.add((char) (pozicija.charAt(0) + i) + "" + pozicija.charAt(1));
+            uPlus.add((char) (pozicija.charAt(0) - i) + "" + pozicija.charAt(1));
+            uPlus.add(pozicija.charAt(0) + "" + (char) (pozicija.charAt(1) + i));
+            uPlus.add(pozicija.charAt(0) + "" + (char) (pozicija.charAt(1) - i));
+        }
+
+        ArrayList<String> dijagonalno = new ArrayList<>(); //kraljica i lovac
+        for (int i = -7; i < 8; i++) {
+            if (i != 0) {
+                dijagonalno.add((char) (pozicija.charAt(0) + i) + "" + (char) (pozicija.charAt(1) + i)); //sporedna dijagonala;
+                dijagonalno.add((char) (pozicija.charAt(0) + i) + "" + (char) (pozicija.charAt(1) - i)); //sporedna dijagonala;
             }
         }
-        return imaIgraca;
+
+        //za skakaca
+        ArrayList<String> uL = new ArrayList<>(); //skakacu odgovara
+        uL.add((char) (pozicija.charAt(0) - 2) + "" + (char) (pozicija.charAt(1) + 1));
+        uL.add((char) (pozicija.charAt(0) - 2) + "" + (char) (pozicija.charAt(1) - 1));
+        uL.add((char) (pozicija.charAt(0) + 2) + "" + (char) (pozicija.charAt(1) + 1));
+        uL.add((char) (pozicija.charAt(0) + 2) + "" + (char) (pozicija.charAt(1) - 1));
+        uL.add((char) (pozicija.charAt(0) + 1) + "" + (char) (pozicija.charAt(1) + 2));
+        uL.add((char) (pozicija.charAt(0) + 1) + "" + (char) (pozicija.charAt(1) - 2));
+        uL.add((char) (pozicija.charAt(0) - 1) + "" + (char) (pozicija.charAt(1) + 2));
+        uL.add((char) (pozicija.charAt(0) - 1) + "" + (char) (pozicija.charAt(1) - 2));
+        //8 pozicija oko kralja
+
+        //za pjesaka 4pozicije
+        ArrayList<String> malaDijag = new ArrayList<>(); //odg pjesacima
+        for (int i = -1; i < 2; i++) {
+            if (i != 0) {
+                malaDijag.add((char) (pozicija.charAt(0) + i) + "" + (char) (pozicija.charAt(1) + i)); //sporedna dijagonala;
+                malaDijag.add((char) (pozicija.charAt(0) + i) + "" + (char) (pozicija.charAt(1) - i)); //sporedna dijagonala;
+            }
+        }
+
+        //sada prolazimo kroz odg biljeske lokacija;
+
+        for (String dijagonala : dijagonalno) {
+            if (dijagonala.equals(kraljica)) {
+                return true;
+            }
+            if (lovci.contains(dijagonala)) {
+                return true;
+            }
+        }
+
+        for (String x : uPlus) {
+            if (x.equals(kraljica)) {
+                return true;
+            }
+            if (topovi.contains(x)) {
+                return true;
+            }
+        }
+
+        for (String L : uL) {
+            if (skakaci.contains(L)) {
+                return true;
+            }
+        }
+
+        for (String d : malaDijag) {
+            if (pjesaci.contains(d)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -64,7 +64,7 @@ class BoardTest {
             b.move(Pawn.class, ChessPiece.Color.WHITE, "E5");
             b.move(Pawn.class, ChessPiece.Color.WHITE, "E6");
             b.move(Pawn.class, ChessPiece.Color.WHITE, "D7");
-            b.move(Queen.class, ChessPiece.Color.WHITE, "E2");
+            b.move(Queen.class, ChessPiece.Color.WHITE, "E2"); //kraljica
             b.move(Pawn.class, ChessPiece.Color.WHITE, "F4");
             b.move(Pawn.class, ChessPiece.Color.WHITE, "F5");
             b.move(Pawn.class, ChessPiece.Color.WHITE, "F6");
