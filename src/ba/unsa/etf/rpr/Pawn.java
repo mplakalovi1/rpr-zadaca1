@@ -16,7 +16,7 @@ public class Pawn extends ChessPiece {      //pješak;
     }
 
     @Override
-    public void justCheck(String position) throws IllegalChessMoveException{
+    public void justCheck(String position) throws IllegalChessMoveException {
         super.move(position);
         checkPawn(position);
     }
@@ -29,8 +29,13 @@ public class Pawn extends ChessPiece {      //pješak;
         evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) + 1));
         evidencija.add((char) (pocetna.charAt(0) + 1) + "" + (char) (pocetna.charAt(1) + 1));
         evidencija.add((char) (pocetna.charAt(0) - 1) + "" + (char) (pocetna.charAt(1) + 1));
+        evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) - 1));
+        evidencija.add((char) (pocetna.charAt(0) + 1) + "" + (char) (pocetna.charAt(1) - 1));
+        evidencija.add((char) (pocetna.charAt(0) - 1) + "" + (char) (pocetna.charAt(1) - 1));
         if (pocetna.charAt(1) == '2') {
             evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) + 2));
+            evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) - 2));
+
         }
         if (!evidencija.contains(position)) {
             throw new IllegalChessMoveException();
