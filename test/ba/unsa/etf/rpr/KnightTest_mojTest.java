@@ -44,4 +44,17 @@ class KnightTest_mojTest {
                 }
         );
     }
+
+    @Test
+    void move4() {//vertkalno
+        Knight k = new Knight("C7", ChessPiece.Color.WHITE);
+        assertThrows(IllegalChessMoveException.class,
+                () -> {
+                    k.move("D5");
+                    k.move("E7");
+                    k.move("E4");
+                    k.move("E3");
+                }
+        );
+    }
 }
