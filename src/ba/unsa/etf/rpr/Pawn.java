@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr;
 
+import java.util.HashSet;
+
 public class Pawn extends ChessPiece {      //pješak;
     // atributi se nasljedjuju!!! i dovoljni su kao takvi;
 
@@ -16,18 +18,16 @@ public class Pawn extends ChessPiece {      //pješak;
     public void checkPawn(String position) throws IllegalChessMoveException { // f-ja kojom provjeravamo kretnje pješaka;
         position = position.toUpperCase();//prebacujemo u velika slova sve radi manje posla;
         String pocetna = super.getPosition().toUpperCase();
+        HashSet<String> evidencija = new HashSet<>();
 
-        if (position.charAt(0) != pocetna.charAt(0)) {
-            throw new IllegalChessMoveException(); //jos nismo definisali ovaj izuzetak;
+        evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) + 1));
+        evidencija.add((char) (pocetna.charAt(0) + 1) + "" + (char) (pocetna.charAt(1) + 1));
+        evidencija.add((char) (pocetna.charAt(0) - 1) + "" + (char) (pocetna.charAt(1) + 1));
+        if (pocetna.charAt(1) == '2') {
+            evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) + 2));
         }
-        if (position.charAt(1) != pocetna.charAt(1) + 1) {
-
-            if (pocetna.charAt(1) == '2' && position.charAt(1) == '4') {
-                //ne bacaj izuzetak i ne radi nista!!!
-            } else {
-                throw new IllegalChessMoveException();
-            }
-
+        if (!evidencija.contains(position)) {
+            throw new IllegalChessMoveException();
         }
     }
 }

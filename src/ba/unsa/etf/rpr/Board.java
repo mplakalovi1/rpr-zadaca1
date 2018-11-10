@@ -31,6 +31,10 @@ public class Board {
 
     }
 
+    public TreeSet<ChessPiece> getAktivneFigure() {
+        return aktivneFigure;
+    }
+
     public void move(Class type, ChessPiece.Color color, String position) throws IllegalChessMoveException {
 
         boolean pozivLegalan = false;
