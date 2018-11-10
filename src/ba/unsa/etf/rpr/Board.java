@@ -305,8 +305,12 @@ public class Board {
             if (figura instanceof King && figura.getColor() == color) { //nasli smo kralja date boje;
                 pozicija = figura.getPosition().toUpperCase(); //sacuvajmo poziciju kralja;
             }
-            //USPUT BILJEZIMO GDJE SE KOJA FIGURA PROTIVNIKA NALAZI i biljeziti onu ciji je put do kralja cist!!!;
+        }
 
+        // BILJEZIMO GDJE SE KOJA FIGURA PROTIVNIKA NALAZI i biljeziti onu ciji je put do Kralja cist!!!;
+        for (ChessPiece figura : aktivneFigure) {
+            try {
+                preskakanje(figura, pozicija);
                 if (figura instanceof Queen && figura.getColor() != color) {
                     kraljica = figura.getPosition().toUpperCase();
                 }
@@ -322,6 +326,9 @@ public class Board {
                 if (figura instanceof Pawn && figura.getColor() != color) {
                     pjesaci.add(figura.getPosition().toUpperCase());
                 }
+            } catch (IllegalChessMoveException e) {
+                //samo uhvati uredu je ;
+            }
         }
 
         //SADA ZABILJEZIMO POZICIJE U ODGOVARAJUCIM SMJEROVIMA OKO KRALJA;
