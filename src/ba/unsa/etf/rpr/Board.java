@@ -1,5 +1,9 @@
 package ba.unsa.etf.rpr;
 
+import com.sun.source.tree.Tree;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 
@@ -12,6 +16,8 @@ public class Board {
             aktivneFigure.add(new Pawn((char) ('A' + i) + "2", ChessPiece.Color.WHITE)); //alokacija white pijuna;
             aktivneFigure.add(new Pawn((char) ('A' + i) + "7", ChessPiece.Color.BLACK));
         }
+
+
         aktivneFigure.add(new Rook("A1", ChessPiece.Color.WHITE));
         aktivneFigure.add(new Rook("H1", ChessPiece.Color.WHITE));
         aktivneFigure.add(new Rook("A8", ChessPiece.Color.BLACK));
@@ -31,20 +37,17 @@ public class Board {
 
     }
 
-    public TreeSet<ChessPiece> getAktivneFigure() {
-        return aktivneFigure;
-    }
-
     public void move(Class type, ChessPiece.Color color, String position) throws IllegalChessMoveException {
-
+        String pozicija = "";
         boolean pozivLegalan = false;
 
         for (ChessPiece figura : aktivneFigure) { //prolazimo kroz aktivne figure
             if (figura.getClass() == type && figura.getColor() == color) {   //ako se poklapaju tipovi i boja
                 try {
-                    figura.move(position); //provjeravamo da li je potez Legalan;format i granice ploce
+                    figura.justCheck(position); //provjeravamo da li je potez Legalan;format i granice ploce
                     preskakanje(figura, position);//provjeravamo da li preskace nesto;
                     pozivLegalan = true;
+                    pozicija = figura.getPosition();
                     break;
                 } catch (Exception e) {
                     //dovoljno je da uhvati samo izuzetak; }
@@ -54,20 +57,24 @@ public class Board {
         if (!pozivLegalan) { //ako nema figure odgovarajuce ili ovaj potez nije validan za niti jednu od njoh bacamo izuzetak;
             throw new IllegalChessMoveException();
         }
+
         //prethodno smo se uvjerili da je potez validan i da postoji odgovarajuca figura za ovaj potez, sada provjerimo sta se nalazi na trazenoj lokaciji,ako se nalazi;
 
-        for (ChessPiece figura : aktivneFigure) { //trazimo da li na odredisnoj poziciji ima figure i u zavisnosti od njene boje radimo odgovarajuce stvari;
+
+        for (Iterator<ChessPiece> iterator = aktivneFigure.iterator(); iterator.hasNext(); ) {
+            ChessPiece figura = iterator.next();
             if (figura.getPosition().toUpperCase().equals(position.toUpperCase())) {
                 if (figura.getColor() == color) {
-                    throw new IllegalChessMoveException(); //ako na odredistu imamo figuru iste boje
+                    throw new IllegalChessMoveException();
                 } else {
-                    aktivneFigure.remove(figura); //sklanjamo tu figuru koja je druge boje;
+                    iterator.remove();
                 }
             }
         }
-        for (ChessPiece figura : aktivneFigure) { //prolazimo kroz aktivne figure opet kako bi figuri odg promijenili lokaciju
-            if (figura.getClass() == type && figura.getColor() == color) {
-                figura.setPosition(position);
+
+        for (ChessPiece figura : aktivneFigure) { //prolazimo kroz aktivne figure
+            if (figura.getPosition().toUpperCase().equals(pozicija.toUpperCase())) {   //trazimo figuru koju dokazano mozemo prebaciti
+                figura.move(position); //METODOM MOVE PREBACUJEMO !!!
             }
         }
 

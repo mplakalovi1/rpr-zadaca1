@@ -11,8 +11,14 @@ public class Pawn extends ChessPiece {      //pješak;
 
     @Override
     public void move(String positon) throws IllegalChessMoveException { //dopunit cemo motodu move pogodno ovoj figuri;
-        super.move(positon);
-        checkPawn(positon);
+        justCheck(positon);
+        super.setPosition(positon);
+    }
+
+    @Override
+    public void justCheck(String position) throws IllegalChessMoveException{
+        super.move(position);
+        checkPawn(position);
     }
 
     public void checkPawn(String position) throws IllegalChessMoveException { // f-ja kojom provjeravamo kretnje pješaka;

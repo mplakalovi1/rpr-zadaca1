@@ -15,7 +15,7 @@ public abstract class ChessPiece implements Comparable<ChessPiece> { //apstraktn
     }
 
     public int compareTo(ChessPiece figura) {
-        return figura.position.compareTo(this.position);
+       return figura.getPosition().toUpperCase().compareTo(position.toUpperCase());
     }
 
     public String getPosition() { //getter za positon
@@ -33,6 +33,7 @@ public abstract class ChessPiece implements Comparable<ChessPiece> { //apstraktn
     public void move(String position) throws IllegalChessMoveException {
         check(position);//provjera ,ako treba bacit ce izuzetak;
     }
+     public abstract void justCheck(String position) throws IllegalChessMoveException; //abstraktna metoda koja na odg nacin provjerava validnost poteza bez da move radi;
 
     public static void check(String position) {//pomocna f-ja za provjeru ispravnosti formata i pozicije figure;
         if (position.isEmpty()) {
