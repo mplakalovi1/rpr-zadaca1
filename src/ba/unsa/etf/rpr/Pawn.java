@@ -26,17 +26,23 @@ public class Pawn extends ChessPiece {      //pješak;
         String pocetna = super.getPosition().toUpperCase();
         HashSet<String> evidencija = new HashSet<>();
 
-        evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) + 1));
-        evidencija.add((char) (pocetna.charAt(0) + 1) + "" + (char) (pocetna.charAt(1) + 1));
-        evidencija.add((char) (pocetna.charAt(0) - 1) + "" + (char) (pocetna.charAt(1) + 1));
-        evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) - 1));
-        evidencija.add((char) (pocetna.charAt(0) + 1) + "" + (char) (pocetna.charAt(1) - 1));
-        evidencija.add((char) (pocetna.charAt(0) - 1) + "" + (char) (pocetna.charAt(1) - 1));
-        if (pocetna.charAt(1) == '2') {
-            evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) + 2));
-            evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) - 2));
+        if (super.getColor()==Color.WHITE){
 
+            evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) + 1));
+            evidencija.add((char) (pocetna.charAt(0) + 1) + "" + (char) (pocetna.charAt(1) + 1));
+            evidencija.add((char) (pocetna.charAt(0) - 1) + "" + (char) (pocetna.charAt(1) + 1));
+            if (pocetna.charAt(1) == '2') {
+                evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) + 2));
+            }}
+            else{
+            evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) - 1));
+            evidencija.add((char) (pocetna.charAt(0) + 1) + "" + (char) (pocetna.charAt(1) - 1));
+            evidencija.add((char) (pocetna.charAt(0) - 1) + "" + (char) (pocetna.charAt(1) - 1));
+            if (pocetna.charAt(1) == '7') {
+                evidencija.add(pocetna.charAt(0) + "" + (char) (pocetna.charAt(1) - 2));
+            }
         }
+
         if (!evidencija.contains(position)) {
             throw new IllegalChessMoveException();
         }
