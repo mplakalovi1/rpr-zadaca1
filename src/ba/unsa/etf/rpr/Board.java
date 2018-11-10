@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr;
 
 import com.sun.source.tree.Tree;
+import com.sun.source.tree.WhileLoopTree;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -257,17 +258,39 @@ public class Board {
     }
 
     public void move(String oldPosition, String newPosition) throws IllegalChessMoveException {
-        boolean ima = false; //pretp. da je prazno to mjesto
+        boolean ima = false; //prep da na oldPosition nema nista,pokusajmo dokazati suprotno :P
+        String pozicija = ""; //ovdje cemo cuvati poziciju figure koju mozda budemo mogli prebaciti;
+        ChessPiece.Color boja = ChessPiece.Color.WHITE;
+
         for (ChessPiece figura : aktivneFigure) {
             if (figura.getPosition().toUpperCase().equals(oldPosition.toUpperCase())) {
-                move(figura.getClass(), figura.getColor(), newPosition);
+                figura.justCheck(newPosition); //da li je poziv validan;
+                preskakanje(figura, newPosition); //da li preskace nesto
                 ima = true;
+                pozicija = figura.getPosition();
+                boja = figura.getColor();
             }
         }
-        if (!ima) { //ako je zaista prazno bacamo izuzetak, jer nemamo koju figuru pomjeriti;
-            throw new IllegalChessMoveException();
+        if (!ima) {
+            throw new IllegalChessMoveException();//ako uopste nema nista na tom mjestu bacamo izuzetak;
+        }
+        for (Iterator<ChessPiece> iterator = aktivneFigure.iterator(); iterator.hasNext(); ) { //provjeravamo sta je na novoj poziciji,figura koje boje;
+            ChessPiece figura = iterator.next();
+            if (figura.getPosition().toUpperCase().equals(newPosition.toUpperCase())) {
+                if (figura.getColor() == boja) { // ako je figura iste boje bacamo izuzetak , a ako nije remove-amo figuru koja je druge boje;
+                    throw new IllegalChessMoveException();
+                } else {
+                    iterator.remove();
+                }
+            }
+        }
+        for (ChessPiece figura : aktivneFigure) { //prolazimo kroz aktivne figure
+            if (figura.getPosition().toUpperCase().equals(pozicija.toUpperCase())) {   //trazimo figuru koju dokazano mozemo prebaciti
+                figura.move(newPosition); //METODOM MOVE PREBACUJEMO !!!
+            }
         }
     }
+
 
     public boolean isCheck(ChessPiece.Color color) {
         boolean imaIgraca = false;
